@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Speech converter</title>
+    <link rel="stylesheet" href="sph.css">
+</head>
+<body>
+    <body>
+      
+
+  <!-- Hamburger Menu -->
+<div id="hamburger" onclick="toggleMenu()" title="Menu">
+  <div class="bar top"></div>
+  <div class="bar middle"></div>
+  <div class="bar bottom"></div>
+</div>
+
+<nav id="menu" class="slide-menu">
+  <ul>
+    <li><a href="index.html" onclick="closeMenu()">Home</a></li>
+    <li><a href="about.html" onclick="closeMenu()">About</a></li>
+    <li><a href="contact.html" onclick="closeMenu()">Contact</a></li>
+    <li><a href="#" onclick="logout()">Logout</a></li>
+  </ul>
+</nav>
+
+
+  <!-- Your existing page content here -->
+
+  <div class="anupam">
+     <header class="header">
+  <img src="images/kotha-logo.png" alt="KOTHA Logo" class="logo">
+  <h1 class="subtitle">(Text to Speech <span style="color:#ff2963;">Converter</span>)</h1>
+</header>
+
+
+
+    <!-- Text area -->
+    <textarea placeholder="Write anything here...."></textarea>
+
+    <!-- Voice Selection under textarea -->
+    <select id="voiceSelect"></select>
+
+    <!-- Speed & Pitch under voice selection -->
+    <div class="controls">
+      <label>
+        Speed:
+        <input type="range" id="rate" min="0.5" max="2" step="0.1" value="1">
+        <span id="rateValue">1</span>
+      </label>
+      <label>
+        Pitch:
+        <input type="range" id="pitch" min="0" max="2" step="0.1" value="1">
+        <span id="pitchValue">1</span>
+      </label>
+    </div>
+
+    <!-- Buttons row (Listen, Pause, Resume, Stop) -->
+    <div class="row">
+      <div class="buttons">
+        <button id="speakBtn">▶ Listen</button>
+        <button id="pauseBtn">⏸ Pause</button>
+        <button id="resumeBtn">⏯ Resume</button>
+        <button id="stopBtn">⏹ Stop</button>
+        <button id="downloadBtn">💾 Download</button>
+      </div>
+    </div>
+</div>
+
+
+    
+    </div>
+    <!-- Login Button (top-right or wherever you want) -->
+<button class="login-btn" onclick="openLogin()">Login</button>
+
+<!-- Login Modal -->
+<div class="login-modal" id="loginModal">
+  <div class="login-container">
+    <span class="close-btn" onclick="closeLogin()">&times;</span>
+    <h2>Login to <strong>KOTHA</strong></h2>
+    <form>
+      <div class="input-group">
+        <label for="username">Username or Email Address</label>
+        <input type="text" id="username" required />
+      </div>
+      <div class="input-group">
+  <label for="password">Enter Password</label>
+  
+  <div class="password-wrapper">
+  <input type="password" id="password" required />
+  <span class="toggle-password" onclick="togglePassword('password', this)">
+    &#128065; <!-- Eye icon -->
+  </span>
+</div>
+
+</div>
+      <div class="options-row">
+        <label class="remember">
+          <input type="checkbox" /> Remember me
+        </label>
+        <a href="#" onclick="openForgot()">Forgot password?</a>
+
+      </div>
+      <button type="button" onclick="validateLogin()">Login</button>
+
+      <!--<button type="button" onclick="alert('Login clicked!')">Login</button> -->
+
+      <p class="signup-link">Don't have an account? <a href="#" onclick="switchToSignup()">Sign up</a></p>
+
+    </form>
+  </div>
+</div>
+
+<!-- Sign Up Modal -->
+<div class="signup-modal" id="signupModal">
+  <div class="login-container">
+    <span class="close-btn" onclick="closeSignup()">&times;</span>
+    <h2>Sign Up to <strong>KOTHA</strong></h2>
+    <form>
+      <div class="input-group">
+        <label for="new-username">Username</label>
+        <input type="text" id="new-username" required />
+      </div>
+      <div class="input-group">
+        <label for="new-email">Email Address</label>
+        <input type="email" id="new-email" required />
+      </div>
+      <div class="input-group">
+  <label for="new-password">Enter Password</label>
+  
+
+  <div class="password-wrapper">
+  <input type="password" id="password" required />
+  <span class="toggle-password" onclick="togglePassword('password', this)">
+    &#128065; <!-- Eye icon -->
+  </span>
+</div>
+
+</div>
+      <!-- <button type="button" onclick="alert('Successfully Signed Up!')">Create an Account</button> -->
+       <button type="button" onclick="validateSignup()">Sign Up</button>
+
+      <p class="signup-link">Already have an account? <a href="#" onclick="switchToLogin()">Log in</a></p>
+    </form>
+  </div>
+</div>
+
+<!-- Forgot Password Modal -->
+<div class="forgot-modal" id="forgotModal" style="display:none;">
+  <div class="login-container">
+    <span class="close-btn" onclick="closeForgot()">&times;</span>
+    <h2>Reset Password</h2>
+    <form>
+      <div class="input-group">
+        <label for="forgot-username">Enter Username or Email</label>
+        <input type="text" id="forgot-username" required />
+      </div>
+      <div class="input-group">
+        <label for="new-forgot-password">New Password</label>
+        <input type="password" id="new-forgot-password" required />
+      </div>
+      <button type="button" onclick="resetPassword()">Reset</button>
+    </form>
+  </div>
+</div>
+
+
+
+    <script>
+        let speech=new SpeechSynthesisUtterance();
+        let voices=[];
+
+        let voiceSelect=document.querySelector("select");
+
+        window.speechSynthesis.onvoiceschanged = () => {
+            voices=window.speechSynthesis.getVoices();
+            speech.voice=voices[0];
+
+            voices.forEach((voice,i) => {voiceSelect.options[i]=new Option(voice.name,i)});
+        };
+
+        voiceSelect.addEventListener("change", ()=>{
+            speech.voice=voices[voiceSelect.value];
+                });
+
+        document.querySelector("button").addEventListener("click", () =>{
+            speech.text = document.querySelector("textarea").value;
+            window.speechSynthesis.speak(speech);
+        });
+        const rateInput = document.getElementById("rate");
+const pitchInput = document.getElementById("pitch");
+const rateValue = document.getElementById("rateValue");
+const pitchValue = document.getElementById("pitchValue");
+
+rateInput.addEventListener("input", () => {
+  speech.rate = rateInput.value;
+  rateValue.textContent = rateInput.value;
+});
+
+pitchInput.addEventListener("input", () => {
+  speech.pitch = pitchInput.value;
+  pitchValue.textContent = pitchInput.value;
+});
+const speakBtn = document.getElementById("speakBtn");
+const pauseBtn = document.getElementById("pauseBtn");
+const resumeBtn = document.getElementById("resumeBtn");
+const stopBtn = document.getElementById("stopBtn");
+
+
+speakBtn.addEventListener("click", () => {
+  speech.text = document.querySelector("textarea").value;
+  window.speechSynthesis.cancel(); // cancel any ongoing speech
+  window.speechSynthesis.speak(speech);
+});
+
+pauseBtn.addEventListener("click", () => {
+  if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+    window.speechSynthesis.pause();
+  }
+});
+
+resumeBtn.addEventListener("click", () => {
+  if (window.speechSynthesis.paused) {
+    window.speechSynthesis.resume();
+  }
+});
+
+stopBtn.addEventListener("click", () => {
+  window.speechSynthesis.cancel();
+});
+
+ async function downloadSpeech(text) {
+    try {
+      const ibmVoices = {
+      "en-US": "en-US_AllisonV3Voice",
+      "en-GB": "en-GB_KateV3Voice",
+      "hi-IN": "hi-IN_EnthusiasticMaleVoice" // example Hindi voice if enabled
+    };
+    const voiceMap = {
+  "Google US English": "en-US_AllisonV3Voice",   // female
+  "Google UK English Male": "en-GB_JamesV3Voice", // male
+  "Google हिन्दी": "hi-IN_MadhurV3Voice"          // male (Hindi)
+};
+
+  let browserVoice = voices[voiceSelect.value]?.name;
+let selectedIBMVoice = voiceMap[browserVoice] || "en-US_AllisonV3Voice"; 
+
+
+  
+
+      const response = await fetch(
+        "https://api.us-south.text-to-speech.watson.cloud.ibm.com/v1/synthesize?voice=" + selectedIBMVoice,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Basic " + btoa("apikey:cT_XJF329gD2jDfOK7dUuT_A8cY6kl33yIy4Ia_-E6Ow"), // replace with your API key
+            "Accept": "audio/wav"
+          },
+          body: JSON.stringify({ text })
+        }
+      );
+
+      if (!response.ok) throw new Error("TTS request failed");
+
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "speech.wav";
+      a.click();
+
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      alert("Error generating speech: " + err.message);
+    }
+  }
+
+  document.getElementById("downloadBtn").addEventListener("click", () => {
+    const text = document.querySelector("textarea").value.trim();
+    if (!text) {
+      alert("Please enter some text first!");
+      return;
+    }
+    downloadSpeech(text);
+  });
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+    <script>
+  function openLogin() {
+    document.getElementById("loginModal").style.display = "block";
+  }
+
+  function closeLogin() {
+    document.getElementById("loginModal").style.display = "none";
+    clearLoginFields();
+  }
+
+  function openSignup() {
+    document.getElementById("signupModal").style.display = "block";
+  }
+
+  function closeSignup() {
+    document.getElementById("signupModal").style.display = "none";
+    clearSignupFields();
+  }
+
+  function switchToSignup() {
+    closeLogin();
+    openSignup();
+  }
+
+  function switchToLogin() {
+    closeSignup();
+    openLogin();
+  }
+
+  window.onclick = function (event) {
+    const loginModal = document.getElementById("loginModal");
+    const signupModal = document.getElementById("signupModal");
+    if (event.target === loginModal) {
+      closeLogin();
+    }
+    if (event.target === signupModal) {
+      closeSignup();
+    }
+  };
+
+  function clearLoginFields() {
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+  }
+
+  function clearSignupFields() {
+    document.getElementById("new-username").value = "";
+    document.getElementById("new-email").value = "";
+    document.getElementById("new-password").value = "";
+  }
+
+//function togglePassword(inputId, toggleElement) {
+  //const input = document.getElementById(inputId);
+//  if (input.type === "password") {
+  //  input.type = "text";
+   // toggleElement.textContent = "🙈"; // change icon when visible
+//  } else {
+  //  input.type = "password";
+   // toggleElement.textContent = "👁️"; // reset icon when hidden
+//  }
+//}
+
+  function togglePassword(fieldId, icon) {
+    const input = document.getElementById(fieldId);
+    if (input.type === "password") {
+      input.type = "text";
+      icon.style.color = "#007bff"; // highlight when active
+    } else {
+      input.type = "password";
+      icon.style.color = "#555"; // reset color
+    }
+  }
+
+
+
+function resetAccount(){
+  localStorage.removeItem('userData');
+  alert('Account cleared. Please sign up again.');
+}
+
+
+   function hashPassword(password, salt) {
+    return CryptoJS.SHA256(password + salt).toString();
+  }
+
+  // ✅ Signup (store salt + hash)
+  function validateSignup() {
+    const newUsername = document.getElementById("new-username").value.trim();
+    const newEmail = document.getElementById("new-email").value.trim();
+    const newPassword = document.getElementById("new-password").value.trim();
+
+    if (!newUsername || !newEmail || !newPassword) {
+      alert("Please fill in all fields to sign up.");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(newEmail)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      alert("Password must be at least 6 characters long.");
+      return;
+    }
+
+    // Generate random salt
+    const salt = CryptoJS.lib.WordArray.random(16).toString();
+
+    const userData = {
+      username: newUsername,
+      email: newEmail,
+      salt: salt,  // store salt
+      password: hashPassword(newPassword, salt) // 🔒 store salted hash
+    };
+
+    localStorage.setItem("userData", JSON.stringify(userData));
+
+    alert("Sign up successful! You can now log in.");
+    clearSignupFields();
+    closeSignup();
+    openLogin();
+  }
+
+  // ✅ Login (rehash with stored salt)
+  function validateLogin() {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (!username || !password) {
+      alert("Please fill in both username and password.");
+      return;
+    }
+
+    const storedUser = JSON.parse(localStorage.getItem("userData"));
+    if (!storedUser) {
+      alert("No account found. Please sign up first.");
+      return;
+    }
+
+    // Hash input password with stored salt
+    const enteredHash = hashPassword(password, storedUser.salt);
+
+    if (
+      username === storedUser.username &&
+      enteredHash === storedUser.password
+    ) {
+      alert("Login successful!");
+      closeLogin();
+    } else {
+      alert("Incorrect username or password.");
+    }
+  }
+
+  function openForgot() {
+  document.getElementById("forgotModal").style.display = "block";
+}
+
+function closeForgot() {
+  document.getElementById("forgotModal").style.display = "none";
+  document.getElementById("forgot-username").value = "";
+  document.getElementById("new-forgot-password").value = "";
+}
+
+function resetPassword() {
+  const id = document.getElementById("forgot-username").value.trim();
+  const newPass = document.getElementById("new-forgot-password").value.trim();
+
+  if (!id || !newPass) {
+    alert("Please fill in both fields.");
+    return;
+  }
+
+  if (newPass.length < 6) {
+    alert("Password must be at least 6 characters long.");
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+  const userIndex = users.findIndex(u =>
+    u.username.toLowerCase() === id.toLowerCase() ||
+    u.email.toLowerCase() === id.toLowerCase()
+  );
+
+  if (userIndex === -1) {
+    alert("No user found with this username/email.");
+    return;
+  }
+
+  const salt = CryptoJS.lib.WordArray.random(16).toString();
+  users[userIndex].salt = salt;
+  users[userIndex].password = hashPassword(newPass, salt);
+
+  localStorage.setItem("users", JSON.stringify(users));
+
+  alert("Password reset successful! You can now log in with your new password.");
+  closeForgot();
+  openLogin();
+}
+
+
+
+  
+
+  function toggleMenu() {
+  const menu = document.getElementById("menu");
+  const hamburger = document.getElementById("hamburger");
+  menu.classList.toggle("open");
+  hamburger.classList.toggle("active");
+}
+
+function closeMenu() {
+  document.getElementById("menu").classList.remove("open");
+  document.getElementById("hamburger").classList.remove("active");
+}
+
+function logout() {
+  localStorage.removeItem("userData");
+  alert("You have been logged out.");
+  closeMenu();
+  openLogin();
+}
+
+// Optional: Close menu if clicked outside
+window.addEventListener("click", function (event) {
+  const menu = document.getElementById("menu");
+  const hamburger = document.getElementById("hamburger");
+
+  if (
+    !menu.contains(event.target) &&
+    !hamburger.contains(event.target)
+  ) {
+    closeMenu();
+  }
+});
+
+
+</script>
+
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Connect With Us</h1>
+        <div class="bt">
+            <button><a href="index.html">Home</a></button>
+        </div>
+        <p>We would love to respond your queries and help you succeed.<br> Feel free to get in touch with us.</p>
+        
+        <div class="contain-box">
+            
+            <div class="contact-left">
+                <h3>Sent your request</h3>
+                <form>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Name</label>
+                            <input type="text" placeholder="Your Name">
+                        </div>
+                        <div class="input-group">
+                            <label>Phone</label>
+                            <input type="text" placeholder="+1 234 567 890">
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="kothatts2025@gmail.com">
+                        </div>
+                        <div class="input-group">
+                            <label>Subject</label>
+                            <input type="text" placeholder="product demo">
+                        </div>
+                    </div>
+
+                    <label>Message us</label>
+                    <textarea rows="5" placeholder="Your Message"></textarea>
+
+                    <button type="submit">Send Us</button>
+                </form>
+
+            </div>
+            <div class="contact-right">
+                <h3>Reach us</h3>
+
+                <table>
+                    <tr>
+                        <td>Email</td>
+                        <td>kothatts2025@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td>Phone</td>
+                        <td>+1 234 567 890</td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td>Kalidona, P.S: Arambagh, Dist.: Hooghly<br>
+                            State: West Bengal, 712413</td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        
+    </div>
+
+    <footer>
+    &copy; 2025 KOTHA Project. All rights reserved.
+  </footer>
+  
+    <style>
+
+        * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      width: 100%;
+      min-height: 100vh;
+      background: linear-gradient(45deg, #010758, #490d61);
+      font-size: 14px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      padding: 20px;
+    }
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 20px auto;
+    }
+    .container h1 {
+      color: rgb(243, 13, 220);
+      text-align: center;
+      margin-bottom: 15px;
+    text-shadow: 
+        2px 1px 0 #160ef3,   
+        2px 2px 0 #fcfafa;
+    }
+    .bt {
+      text-align: right;
+      margin-bottom: 15px;
+    }
+    .bt button {
+      background: #007bff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: none;
+    }
+    .bt a {
+      text-decoration: none;
+      font-size: 15px;
+      color: white;
+    }
+    .bt a:hover {
+      color: rgb(242, 255, 0);
+    }
+    .container p {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .contain-box {
+      background: #fff;
+      display: flex;
+      flex-wrap: wrap;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .contact-left {
+      flex: 1 1 60%;
+      padding: 30px;
+      background: #fff;
+      color: #075e0a;
+      min-width: 300px;
+    }
+    .contact-right {
+      flex: 1 1 40%;
+      padding: 30px;
+      background: rgb(248, 248, 89);
+      color: #2a0ac7;
+      min-width: 250px;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    .input-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      gap: 15px;
+    }
+    .input-row .input-group {
+      flex: 1 1 45%;
+      min-width: 200px;
+    }
+    input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      outline: none;
+      padding-bottom: 5px;
+    }
+    textarea {
+      width: 100%;
+      border: 1px solid #ccc;
+      outline: none;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+    }
+    label {
+      margin-bottom: 6px;
+      display: block;
+      color: #1c00b5;
+      font-weight: bold;
+    }
+    button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 18px;
+      border: none;
+      outline: none;
+      border-radius: 30px;
+      height: 40px;
+      cursor: pointer;
+      box-shadow: 0px 5px 15px 0px rgba(28, 0, 181, 0.3);
+    }
+    button:hover {
+      background-color: #b300b3;
+    }
+    .contact-left h3,
+    .contact-right h3 {
+      color: #007bff;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+    }
+    tr td:first-child {
+      padding-right: 20px;
+      font-weight: bold;
+    }
+    tr td {
+      padding-top: 15px;
+    }
+
+    /* ✅ Responsive tweaks */
+    @media (max-width: 768px) {
+      .container h1 {
+        font-size: 28px;
+      }
+      .contain-box {
+        flex-direction: column;
+      }
+      .contact-left, .contact-right {
+        flex: 1 1 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        font-size: 12px;
+        padding: 10px;
+      }
+      .bt {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .bt button {
+        width: 100%;
+      }
+      input, textarea {
+        font-size: 14px;
+      }
+      button {
+        width: 100%;
+      }
+    }
+       /* *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            width: 100%;
+             min-height: 100vh;
+            background: linear-gradient(45deg,#010758,#490d61); ;
+            font-size: 14px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+             display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+             color: white;
+        }
+        .container{
+            width: 80%;
+            margin: 50px auto;
+        }
+        .container h1{
+             color: rgb(243, 13, 220);
+        }
+        
+        .bt{
+            padding-left: 1145px;
+            border-radius: 0px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        .bt a{
+            text-decoration: none;
+            font-size: 15px;
+            color: white;
+        }
+        .bt a:hover{
+            color: rgb(242, 255, 0);
+        }
+        .contain-box{
+            background: #fff;
+            display: flex;
+        }
+        .contact-left{
+            flex-basis: 60%;
+            padding: 40px 60px;
+            background: #fff;
+            color: #075e0a;
+        }
+        .contact-right{
+            flex-basis: 40%;
+            padding: 40px ;
+            background: rgb(248, 248, 89);
+            color: #2a0ac7;
+        }
+        
+        h1{
+            margin-bottom: 10px;
+            
+        }
+        .container p{
+            margin-bottom: 40px;
+
+        }
+        .input-row{
+            display:flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+
+        }
+        .input-row .input-group{
+            flex-basis: 45%;
+        }
+        input{
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            outline: none;
+            padding-bottom: 5px;
+        }
+        textarea{
+            width: 100%;
+            border: 1px solid #ccc;
+            outline: none;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        label{
+            margin-bottom: 6px;
+            display: black;
+            color: #1c00b5;
+        }
+        button{
+             background-color: #007bff;
+            color: rgb(247, 247, 244);
+            width:100px;
+            border: none;
+            outline: none;
+            border-radius: 30px;
+            height: 35px;
+            box-shadow: 0px 5px 15px 0px rgba(28,0,181,0.3);
+
+        }
+        .contact-left h3{
+            color:  #007bff;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        .contact-right h3{
+            color:  #007bff;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        tr td:first-child{
+            padding-right: 20px;
+        }
+        tr td{
+            padding-top: 20px;
+        }
+
+        button:hover{
+            background-color: #b300b3;
+        } */
+    </style>
+    
+</body>
+</html>

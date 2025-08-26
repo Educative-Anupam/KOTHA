@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About - KOTHA</title>
+  <link rel="stylesheet" href="sph.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+    }
+
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    header h1 span{
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      color: gold;
+      text-shadow: 
+        2px 1px 0 #f30e90,   
+        2px 2px 0 #fcfafa;
+    }
+    header a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    main h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #b300b3;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    main p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    main p strong{
+      font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    .faq {
+      margin-bottom: 25px;
+    }
+
+    .faq h3 {
+      font-size: 20px;
+      margin-bottom: 8px;
+      color: #ff2963;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    .faq p {
+      font-size: 16px;
+      color: #444;
+      line-height: 1.6;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    /* 📱 Responsive */
+    @media (max-width: 480px) {
+      main h2 {
+        font-size: 22px;
+      }
+      .faq h3 {
+        font-size: 18px;
+      }
+      .faq p {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>About <span>KOTHA</span></h1>
+    <a href="index.html">← Back to Home</a>
+  </header>
+
+  <main>
+    <h2>What is KOTHA?</h2>
+    <p>
+      <strong>KOTHA</strong> is a user-friendly web-based Text to Speech (TTS) converter
+      that allows users to type or paste text into a box and listen to it spoken out loud.
+      Built using modern web technologies, KOTHA makes it easy to convert written words
+      into speech in various available voices and languages supported by your browser.
+    </p>
+
+    <h2>Why KOTHA?</h2>
+    <p>
+      Whether you're learning a new language, need accessibility support, or just want to
+      hear your writing read aloud, KOTHA offers a lightweight and efficient way to do so —
+      right in your browser, with no installations required.
+    </p>
+
+    <h2>Technologies Used</h2>
+    <ul>
+      <li>HTML, CSS, JavaScript</li>
+      <li>Web Speech API (Text-to-Speech)</li>
+      <li>LocalStorage (for simple login/signup functionality)</li>
+    </ul>
+
+    <!-- ✅ New FAQ Section -->
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq">
+      <h3>1. What does TTS mean?</h3>
+      <p>
+        TTS stands for <strong>Text-to-Speech</strong>. It is a technology that converts written
+        text into spoken voice output, allowing computers and applications to “speak” content
+        naturally.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>2. What Languages Does KOTHA Support?</h3>
+      <p>
+        KOTHA supports multiple languages and voices (such as English, Hindi, Bengali, Spanish,
+        and many more) depending on the voices available in your browser or integrated API
+        service.
+      </p>
+    </div>
+
+    <a class="back-link" href="index.html">← Go back to Home</a>
+  </main>
+
+  <footer>
+    &copy; 2025 KOTHA Project. All rights reserved.
+  </footer>
+
+</body>
+</html>
